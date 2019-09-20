@@ -2,6 +2,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const CricketScoreKeeper = require('./cricket-score-keeper');
 
 const app = express();
 
@@ -17,12 +18,54 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const cricketInstanceOne = CricketScoreKeeper();
+const cricketInstanceTwo = CricketScoreKeeper();
+
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {
+        overStringOne: cricketInstanceOne.currentOverString(),
+        totalOne: cricketInstanceOne.totalScore(),
+        wicketsOne: cricketInstanceOne.wicketCount(),
+        oversPlayedOne: cricketInstanceOne.overCount(),
+        overStringTwo: cricketInstanceTwo.currentOverString(),
+        totalTwo: cricketInstanceTwo.totalScore(),
+        wicketsTwo: cricketInstanceTwo.wicketCount(),
+        oversPlayedTwo: cricketInstanceTwo.overCount()
+    });
 });
 
 app.post('/add/play', (req, res) => {
-    console.log(req.body);
+    let play = req.body;
+    play = Object.keys(play);
+    if (play[0] === 'choiceOne') {
+        cricketInstanceOne.addToCurrentOver(req.body.choiceOne);
+    } else if (play[0] === 'choiceTwo') {
+        cricketInstanceTwo.addToCurrentOver(req.body.choiceTwo);
+    };
+    res.redirect('/');
+});
+
+app.post('/set/over/count', (req, res) => {
+    cricketInstanceOne.setOvers(req.body.overCount);
+    cricketInstanceTwo.setOvers(req.body.overCount);
+    res.redirect('/');
+});
+
+app.post('/submit/over', (req, res) => {
+    const team = req.body.team;
+    if (team === '1') {
+        const over = cricketInstanceOne.currentOverString();
+        if (over.length === 6) {
+            cricketInstanceOne.addOverScore(over);
+            cricketInstanceOne.resetCurrentOver();
+        }
+    } else if (team === '2') {
+        const over = cricketInstanceTwo.currentOverString();
+        if (over.length === 6) {
+            cricketInstanceTwo.addOverScore(over);
+            cricketInstanceTwo.resetCurrentOver();
+        }
+    }
     res.redirect('/');
 });
 

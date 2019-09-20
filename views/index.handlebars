@@ -1,16 +1,91 @@
 <div class='row'>
-    <h1>Cricket score keeper</h1>
+    <div style='margin:8px' class='row mx-auto'>
+        <h4>Enter overs: </h4>
+        <form action="/set/over/count" method="POST">
+            <div class="input-group mb-3">
+                <input name='overCount' type="number" class="form-control" placeholder="Overs.." aria-label="Over count"
+                    aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <div class='row'>
-    <form action="/add/play" method="POST">
-    <div style='display:inline-block'>
-        <button type="submit" name='choice' value='1'  class="btn btn-info">1</button>
-        <button type="submit" name='choice' value='2'  class="btn btn-info">2</button>
-        <button type="submit" name='choice' value='3'  class="btn btn-info">3</button>
-        <button type="submit" name='choice' value='4'  class="btn btn-info">4</button>
-        <button type="submit" name='choice' value='6'  class="btn btn-info">6</button>
-        <button type="submit" name='choice' value='w'  class="btn btn-info">w</button>
-        <button type="submit" name='choice' value='-' class="btn btn-info">-</button>
+    <div class='col-sm mx-auto'>
+        <div class='row'>
+            <h1>Team 1</h1>
+
+        </div>
+        <div class='row'>
+            <div class='col-sm'>
+                <form action="/add/play" method="POST">
+                    <div class='mx-auto'>
+                        <button type="submit" name='choiceOne' value='1' class="btn btn-info">1</button>
+                        <button type="submit" name='choiceOne' value='2' class="btn btn-info">2</button>
+                        <button type="submit" name='choiceOne' value='3' class="btn btn-info">3</button>
+                        <button type="submit" name='choiceOne' value='4' class="btn btn-info">4</button>
+                        <button type="submit" name='choiceOne' value='6' class="btn btn-info">6</button>
+                        <button type="submit" name='choiceOne' value='w' class="btn btn-info">w</button>
+                        <button type="submit" name='choiceOne' value='-' class="btn btn-info">-</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class='row'>
+            <form action="/submit/over" method="POST">
+
+                <button style='margin:8px' type='submit' name='team' value='1' class='btn btn-primary'>Submit Over</button>
+            </form>
+        </div>
+        <div class='row'>
+            <h3 style='color:grey'>Current over: {{overStringOne}}</h3>
+        </div>
+        <div class='row'>
+            <div class='col-sm'>
+                <h4>{{totalOne}}/{{wicketsOne}}</h4>
+            </div>
+            <div class='col-sm'>
+                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedOne}}</label>
+            </div>
+        </div>
     </div>
-    </form>
+    <div class='col-sm mx-auto'>
+        <div class='row'>
+            <h1>Team 2</h1>
+
+        </div>
+        <div class='row'>
+            <div class='col-sm'>
+                <form action="/add/play" method="POST">
+                    <div class='mx-auto'>
+                        <button type="submit" name='choiceTwo' value='1' class="btn btn-info">1</button>
+                        <button type="submit" name='choiceTwo' value='2' class="btn btn-info">2</button>
+                        <button type="submit" name='choiceTwo' value='3' class="btn btn-info">3</button>
+                        <button type="submit" name='choiceTwo' value='4' class="btn btn-info">4</button>
+                        <button type="submit" name='choiceTwo' value='6' class="btn btn-info">6</button>
+                        <button type="submit" name='choiceTwo' value='w' class="btn btn-info">w</button>
+                        <button type="submit" name='choiceTwo' value='-' class="btn btn-info">-</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class='row'>
+            <form action="/submit/over" method="POST">
+                <button style='margin:8px' type='submit' name='team' value='2' class='btn btn-primary'>Submit Over</button>
+            </form>
+        </div>
+        <div class='row'>
+            <h3 style='color:grey'>Current over: {{overStringTwo}}</h3>
+        </div>
+        <div class='row'>
+            <div class='col-sm'>
+                <h4>{{totalTwo}}/{{wicketsTwo}}</h4>
+            </div>
+            <div class='col-sm'>
+                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedTwo}}</label>
+            </div>
+        </div>
+    </div>
 </div>

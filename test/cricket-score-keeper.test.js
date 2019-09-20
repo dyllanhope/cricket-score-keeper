@@ -84,7 +84,7 @@ describe('Cricket score keeper tests', () => {
 
             assert.strict.equal(cricketInstance.currentOverString(), '-1-2-3');
         });
-        it('Should return a current over of "-121-4" an not allow a 7th pay to be added', () => {
+        it('Should return a current over of "-121-4" an not allow a 7th play to be added', () => {
             const cricketInstance = cricketScoreKeeper();
             cricketInstance.addToCurrentOver('-');
             cricketInstance.addToCurrentOver('1');
