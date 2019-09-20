@@ -16,6 +16,8 @@
         </form>
     </div>
 </div>
+{{#if overError}}
+{{else}}
 <div class='row'>
     <div class='col-sm mx-auto'>
         <div class='row'>
@@ -53,18 +55,9 @@
                         Over</button>
                 </form>
             </div>
-            {{#if overError}}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Please make sure you have entered a number of overs!</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {{else}}
             <div class='row'>
                 <h3 style='color:grey'>Current over: {{overStringOne}}</h3>
             </div>
-            {{/if}}
         </div>
         {{/if}}
         <div class='row'>
@@ -112,18 +105,9 @@
                         Over</button>
                 </form>
             </div>
-            {{#if overError}}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Please make sure you have entered a number of overs!</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {{else}}
             <div class='row'>
                 <h3 style='color:grey'>Current over: {{overStringTwo}}</h3>
             </div>
-            {{/if}}
         </div>
         {{/if}}
         <div class='row'>
@@ -137,6 +121,7 @@
         </div>
     </div>
 </div>
+{{/if}}
 {{#if gameOver}}
 {{#if draw}}
 <div class='row'>
