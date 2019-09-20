@@ -88,6 +88,36 @@ module.exports = () => {
 
     const overAmount = () => { return overs; };
 
+    const generateRandomOver = () => {
+        currentOver = '';
+        for (let i = 0; i < 6; i++) {
+            const randomNum = Math.floor(Math.random() * 7) + 1;
+            switch (randomNum) {
+            case 1:
+                currentOver += '1';
+                break;
+            case 2:
+                currentOver += '2';
+                break;
+            case 3:
+                currentOver += '3';
+                break;
+            case 4:
+                currentOver += '4';
+                break;
+            case 5:
+                currentOver += '6';
+                break;
+            case 6:
+                currentOver += 'w';
+                break;
+            case 7:
+                currentOver += '-';
+                break;
+            }
+        }
+    };
+
     return {
         addOverScore,
         totalScore,
@@ -100,6 +130,7 @@ module.exports = () => {
         gameStatus,
         resetGame,
         oversSet,
-        overAmount
+        overAmount,
+        generateRandomOver
     };
 };

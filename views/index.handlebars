@@ -43,8 +43,11 @@
                 </div>
             </div>
             <div class='row'>
+                <form action="/random/over" method="POST">
+                    <button style='margin:8px' type='submit' name='team' value='1' class='btn btn-primary'>Generate random
+                        over</button>
+                </form>
                 <form action="/submit/over" method="POST">
-
                     <button style='margin:8px' type='submit' name='team' value='1' class='btn btn-primary'>Submit
                         Over</button>
                 </form>
@@ -59,7 +62,8 @@
                 <h4>{{totalOne}}/{{wicketsOne}}</h4>
             </div>
             <div class='col-sm'>
-                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedOne}} of {{overAmount}}</label>
+                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedOne}} of
+                    {{overAmount}}</label>
             </div>
         </div>
     </div>
@@ -89,6 +93,9 @@
                 </div>
             </div>
             <div class='row'>
+                <form action="/random/over" method="POST">
+                    <button style='margin:8px' type='submit' name='team' value='2' class='btn btn-primary'>Generate random over</button>
+                </form>
                 <form action="/submit/over" method="POST">
                     <button style='margin:8px' type='submit' name='team' value='2' class='btn btn-primary'>Submit
                         Over</button>
@@ -104,7 +111,8 @@
                 <h4>{{totalTwo}}/{{wicketsTwo}}</h4>
             </div>
             <div class='col-sm'>
-                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedTwo}} of {{overAmount}}</label>
+                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedTwo}} of
+                    {{overAmount}}</label>
             </div>
         </div>
     </div>

@@ -90,6 +90,16 @@ app.post('/submit/over', (req, res) => {
     res.redirect('/');
 });
 
+app.post('/random/over', (req, res) => {
+    const team = req.body.team;
+    if (team === '1') {
+        cricketInstanceOne.generateRandomOver();
+    } else if (team === '2') {
+        cricketInstanceTwo.generateRandomOver();
+    }
+    res.redirect('/');
+});
+
 app.post('/new/game', (req, res) => {
     gameOver = false;
     draw = false;
