@@ -4,6 +4,7 @@ module.exports = () => {
     let wickets = 0;
     let overs = 0;
     let oversPlayed = 0;
+    let currentOver = '';
 
     const addOverScore = (overString) => {
         if (overs !== oversPlayed) {
@@ -50,11 +51,21 @@ module.exports = () => {
         return oversPlayed;
     };
 
+    const addToCurrentOver = (val) => {
+        if (currentOver.length !== 6) {
+            currentOver += val;
+        };
+    };
+
+    const currentOverString = () => { return currentOver; };
+
     return {
         addOverScore,
         totalScore,
         wicketCount,
         setOvers,
-        overCount
+        overCount,
+        addToCurrentOver,
+        currentOverString
     };
 };

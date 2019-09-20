@@ -73,5 +73,28 @@ describe('Cricket score keeper tests', () => {
             assert.strict.equal(cricketInstance.overCount(), 3);
             assert.strict.equal(cricketInstance.totalScore(), 15);
         });
+        it('Should return a current over of "-1-2-3"', () => {
+            const cricketInstance = cricketScoreKeeper();
+            cricketInstance.addToCurrentOver('-');
+            cricketInstance.addToCurrentOver('1');
+            cricketInstance.addToCurrentOver('-');
+            cricketInstance.addToCurrentOver('2');
+            cricketInstance.addToCurrentOver('-');
+            cricketInstance.addToCurrentOver('3');
+
+            assert.strict.equal(cricketInstance.currentOverString(), '-1-2-3');
+        });
+        it('Should return a current over of "-121-4" an not allow a 7th pay to be added', () => {
+            const cricketInstance = cricketScoreKeeper();
+            cricketInstance.addToCurrentOver('-');
+            cricketInstance.addToCurrentOver('1');
+            cricketInstance.addToCurrentOver('2');
+            cricketInstance.addToCurrentOver('1');
+            cricketInstance.addToCurrentOver('-');
+            cricketInstance.addToCurrentOver('4');
+            cricketInstance.addToCurrentOver('4');
+
+            assert.strict.equal(cricketInstance.currentOverString(), '-121-4');
+        });
     });
 });
