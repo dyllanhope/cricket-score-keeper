@@ -21,16 +21,27 @@ app.use(bodyParser.json());
 const cricketInstanceOne = CricketScoreKeeper();
 const cricketInstanceTwo = CricketScoreKeeper();
 
+let gameOver = false;
+let draw = false;
+let winner = '';
+
 app.get('/', (req, res) => {
     res.render('index', {
         overStringOne: cricketInstanceOne.currentOverString(),
         totalOne: cricketInstanceOne.totalScore(),
         wicketsOne: cricketInstanceOne.wicketCount(),
         oversPlayedOne: cricketInstanceOne.overCount(),
+        gameDoneOne: cricketInstanceOne.gameStatus(),
         overStringTwo: cricketInstanceTwo.currentOverString(),
         totalTwo: cricketInstanceTwo.totalScore(),
         wicketsTwo: cricketInstanceTwo.wicketCount(),
-        oversPlayedTwo: cricketInstanceTwo.overCount()
+        oversPlayedTwo: cricketInstanceTwo.overCount(),
+        gameDoneTwo: cricketInstanceTwo.gameStatus(),
+        oversSet: cricketInstanceOne.oversSet(),
+        overAmount: cricketInstanceOne.overAmount(),
+        gameOver,
+        winner,
+        draw
     });
 });
 
@@ -66,6 +77,26 @@ app.post('/submit/over', (req, res) => {
             cricketInstanceTwo.resetCurrentOver();
         }
     }
+    if (cricketInstanceOne.gameStatus() && cricketInstanceTwo.gameStatus()) {
+        gameOver = true;
+        if (cricketInstanceTwo.totalScore() > cricketInstanceOne.totalScore()) {
+            winner = 'Team 2';
+        } else if (cricketInstanceOne.totalScore() > cricketInstanceTwo.totalScore()) {
+            winner = 'Team 1';
+        } else if (cricketInstanceOne.totalScore() === cricketInstanceTwo.totalScore()) {
+            draw = true;
+        };
+    };
+    res.redirect('/');
+});
+
+app.post('/new/game', (req, res) => {
+    gameOver = false;
+    draw = false;
+    winner = '';
+
+    cricketInstanceOne.resetGame();
+    cricketInstanceTwo.resetGame();
     res.redirect('/');
 });
 

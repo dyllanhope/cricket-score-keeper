@@ -6,7 +6,11 @@
                 <input name='overCount' type="number" class="form-control" placeholder="Overs.." aria-label="Over count"
                     aria-describedby="button-addon2">
                 <div class="input-group-append">
+                    {{#if oversSet}}
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2" disabled>Submit</button>
+                    {{else}}
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+                    {{/if}}
                 </div>
             </div>
         </form>
@@ -16,76 +20,119 @@
     <div class='col-sm mx-auto'>
         <div class='row'>
             <h1>Team 1</h1>
-
         </div>
-        <div class='row'>
-            <div class='col-sm'>
-                <form action="/add/play" method="POST">
-                    <div class='mx-auto'>
-                        <button type="submit" name='choiceOne' value='1' class="btn btn-info">1</button>
-                        <button type="submit" name='choiceOne' value='2' class="btn btn-info">2</button>
-                        <button type="submit" name='choiceOne' value='3' class="btn btn-info">3</button>
-                        <button type="submit" name='choiceOne' value='4' class="btn btn-info">4</button>
-                        <button type="submit" name='choiceOne' value='6' class="btn btn-info">6</button>
-                        <button type="submit" name='choiceOne' value='w' class="btn btn-info">w</button>
-                        <button type="submit" name='choiceOne' value='-' class="btn btn-info">-</button>
-                    </div>
+        {{#if gameDoneOne}}
+        <div class="alert alert-success" role="alert">
+            Innings done, please wait for the other teams scores to see who won!
+        </div>
+        {{else}}
+        <div>
+            <div class='row'>
+                <div class='col-sm'>
+                    <form action="/add/play" method="POST">
+                        <div class='mx-auto'>
+                            <button type="submit" name='choiceOne' value='1' class="btn btn-info">1</button>
+                            <button type="submit" name='choiceOne' value='2' class="btn btn-info">2</button>
+                            <button type="submit" name='choiceOne' value='3' class="btn btn-info">3</button>
+                            <button type="submit" name='choiceOne' value='4' class="btn btn-info">4</button>
+                            <button type="submit" name='choiceOne' value='6' class="btn btn-info">6</button>
+                            <button type="submit" name='choiceOne' value='w' class="btn btn-info">w</button>
+                            <button type="submit" name='choiceOne' value='-' class="btn btn-info">-</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class='row'>
+                <form action="/submit/over" method="POST">
+
+                    <button style='margin:8px' type='submit' name='team' value='1' class='btn btn-primary'>Submit
+                        Over</button>
                 </form>
             </div>
+            <div class='row'>
+                <h3 style='color:grey'>Current over: {{overStringOne}}</h3>
+            </div>
         </div>
-        <div class='row'>
-            <form action="/submit/over" method="POST">
-
-                <button style='margin:8px' type='submit' name='team' value='1' class='btn btn-primary'>Submit Over</button>
-            </form>
-        </div>
-        <div class='row'>
-            <h3 style='color:grey'>Current over: {{overStringOne}}</h3>
-        </div>
+        {{/if}}
         <div class='row'>
             <div class='col-sm'>
                 <h4>{{totalOne}}/{{wicketsOne}}</h4>
             </div>
             <div class='col-sm'>
-                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedOne}}</label>
+                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedOne}} of {{overAmount}}</label>
             </div>
         </div>
     </div>
     <div class='col-sm mx-auto'>
         <div class='row'>
             <h1>Team 2</h1>
-
         </div>
-        <div class='row'>
-            <div class='col-sm'>
-                <form action="/add/play" method="POST">
-                    <div class='mx-auto'>
-                        <button type="submit" name='choiceTwo' value='1' class="btn btn-info">1</button>
-                        <button type="submit" name='choiceTwo' value='2' class="btn btn-info">2</button>
-                        <button type="submit" name='choiceTwo' value='3' class="btn btn-info">3</button>
-                        <button type="submit" name='choiceTwo' value='4' class="btn btn-info">4</button>
-                        <button type="submit" name='choiceTwo' value='6' class="btn btn-info">6</button>
-                        <button type="submit" name='choiceTwo' value='w' class="btn btn-info">w</button>
-                        <button type="submit" name='choiceTwo' value='-' class="btn btn-info">-</button>
-                    </div>
+        {{#if gameDoneTwo}}
+        <div class="alert alert-success" role="alert">
+            Innings done, please wait for the other teams scores to see who won!
+        </div>
+        {{else}}
+        <div>
+            <div class='row'>
+                <div class='col-sm'>
+                    <form action="/add/play" method="POST">
+                        <div class='mx-auto'>
+                            <button type="submit" name='choiceTwo' value='1' class="btn btn-info">1</button>
+                            <button type="submit" name='choiceTwo' value='2' class="btn btn-info">2</button>
+                            <button type="submit" name='choiceTwo' value='3' class="btn btn-info">3</button>
+                            <button type="submit" name='choiceTwo' value='4' class="btn btn-info">4</button>
+                            <button type="submit" name='choiceTwo' value='6' class="btn btn-info">6</button>
+                            <button type="submit" name='choiceTwo' value='w' class="btn btn-info">w</button>
+                            <button type="submit" name='choiceTwo' value='-' class="btn btn-info">-</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class='row'>
+                <form action="/submit/over" method="POST">
+                    <button style='margin:8px' type='submit' name='team' value='2' class='btn btn-primary'>Submit
+                        Over</button>
                 </form>
             </div>
+            <div class='row'>
+                <h3 style='color:grey'>Current over: {{overStringTwo}}</h3>
+            </div>
         </div>
-        <div class='row'>
-            <form action="/submit/over" method="POST">
-                <button style='margin:8px' type='submit' name='team' value='2' class='btn btn-primary'>Submit Over</button>
-            </form>
-        </div>
-        <div class='row'>
-            <h3 style='color:grey'>Current over: {{overStringTwo}}</h3>
-        </div>
+        {{/if}}
         <div class='row'>
             <div class='col-sm'>
                 <h4>{{totalTwo}}/{{wicketsTwo}}</h4>
             </div>
             <div class='col-sm'>
-                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedTwo}}</label>
+                <label style='margin-bottom: 0px' for="overs"> Overs played: {{oversPlayedTwo}} of {{overAmount}}</label>
             </div>
         </div>
     </div>
 </div>
+{{#if gameOver}}
+{{#if draw}}
+<div class='row'>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Congratulations!</strong> It's a draw!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form action="/new/game" method="POST">
+        <button style='margin:8px' class='btn btn-dark' type='submit'>New game</button>
+    </form>
+</div>
+{{else}}
+<div class='row'>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Congratulations!</strong> {{winner}} won !
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form action="/new/game" method="POST">
+        <button style='margin:8px' class='btn btn-dark' type='submit'>New game</button>
+    </form>
+</div>
+{{/if}}
+{{/if}}

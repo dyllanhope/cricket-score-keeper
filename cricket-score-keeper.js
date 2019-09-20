@@ -4,6 +4,7 @@ module.exports = () => {
     let wickets = 0;
     let overs = 0;
     let oversPlayed = 0;
+    let overSet = false;
     let currentOver = '';
     let gameDone = false;
 
@@ -52,7 +53,10 @@ module.exports = () => {
 
     const wicketCount = () => { return wickets; };
 
-    const setOvers = (num) => { overs = num; };
+    const setOvers = (num) => {
+        overSet = true;
+        overs = Number(num);
+    };
 
     const overCount = () => {
         return oversPlayed;
@@ -70,6 +74,20 @@ module.exports = () => {
 
     const gameStatus = () => { return gameDone; };
 
+    const resetGame = () => {
+        overSet = false;
+        currentTotal = 0;
+        wickets = 0;
+        overs = 0;
+        oversPlayed = 0;
+        currentOver = '';
+        gameDone = false;
+    };
+
+    const oversSet = () => { return overSet; };
+
+    const overAmount = () => { return overs; };
+
     return {
         addOverScore,
         totalScore,
@@ -79,6 +97,9 @@ module.exports = () => {
         addToCurrentOver,
         currentOverString,
         resetCurrentOver,
-        gameStatus
+        gameStatus,
+        resetGame,
+        oversSet,
+        overAmount
     };
 };
