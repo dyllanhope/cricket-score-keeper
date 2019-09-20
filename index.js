@@ -24,6 +24,7 @@ const cricketInstanceTwo = CricketScoreKeeper();
 let gameOver = false;
 let draw = false;
 let winner = '';
+let overError = true;
 
 app.get('/', (req, res) => {
     res.render('index', {
@@ -41,7 +42,8 @@ app.get('/', (req, res) => {
         overAmount: cricketInstanceOne.overAmount(),
         gameOver,
         winner,
-        draw
+        draw,
+        overError
     });
 });
 
@@ -59,34 +61,40 @@ app.post('/add/play', (req, res) => {
 app.post('/set/over/count', (req, res) => {
     cricketInstanceOne.setOvers(req.body.overCount);
     cricketInstanceTwo.setOvers(req.body.overCount);
+    overError = false;
     res.redirect('/');
 });
 
 app.post('/submit/over', (req, res) => {
-    const team = req.body.team;
-    if (team === '1') {
-        const over = cricketInstanceOne.currentOverString();
-        if (over.length === 6) {
-            cricketInstanceOne.addOverScore(over);
-            cricketInstanceOne.resetCurrentOver();
+    if (cricketInstanceOne.oversSet()) {
+        overError = false;
+        const team = req.body.team;
+        if (team === '1') {
+            const over = cricketInstanceOne.currentOverString();
+            if (over.length === 6) {
+                cricketInstanceOne.addOverScore(over);
+                cricketInstanceOne.resetCurrentOver();
+            }
+        } else if (team === '2') {
+            const over = cricketInstanceTwo.currentOverString();
+            if (over.length === 6) {
+                cricketInstanceTwo.addOverScore(over);
+                cricketInstanceTwo.resetCurrentOver();
+            }
         }
-    } else if (team === '2') {
-        const over = cricketInstanceTwo.currentOverString();
-        if (over.length === 6) {
-            cricketInstanceTwo.addOverScore(over);
-            cricketInstanceTwo.resetCurrentOver();
-        }
-    }
-    if (cricketInstanceOne.gameStatus() && cricketInstanceTwo.gameStatus()) {
-        gameOver = true;
-        if (cricketInstanceTwo.totalScore() > cricketInstanceOne.totalScore()) {
-            winner = 'Team 2';
-        } else if (cricketInstanceOne.totalScore() > cricketInstanceTwo.totalScore()) {
-            winner = 'Team 1';
-        } else if (cricketInstanceOne.totalScore() === cricketInstanceTwo.totalScore()) {
-            draw = true;
+        if (cricketInstanceOne.gameStatus() && cricketInstanceTwo.gameStatus()) {
+            gameOver = true;
+            if (cricketInstanceTwo.totalScore() > cricketInstanceOne.totalScore()) {
+                winner = 'Team 2';
+            } else if (cricketInstanceOne.totalScore() > cricketInstanceTwo.totalScore()) {
+                winner = 'Team 1';
+            } else if (cricketInstanceOne.totalScore() === cricketInstanceTwo.totalScore()) {
+                draw = true;
+            };
         };
-    };
+    } else {
+        overError = true;
+    }
     res.redirect('/');
 });
 
@@ -104,6 +112,7 @@ app.post('/new/game', (req, res) => {
     gameOver = false;
     draw = false;
     winner = '';
+    overError = true;
 
     cricketInstanceOne.resetGame();
     cricketInstanceTwo.resetGame();

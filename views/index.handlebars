@@ -44,7 +44,8 @@
             </div>
             <div class='row'>
                 <form action="/random/over" method="POST">
-                    <button style='margin-top:8px' type='submit' name='team' value='1' class='btn btn-primary'>Generate random
+                    <button style='margin-top:8px' type='submit' name='team' value='1' class='btn btn-primary'>Generate
+                        random
                         over</button>
                 </form>
                 <form action="/submit/over" method="POST">
@@ -52,9 +53,18 @@
                         Over</button>
                 </form>
             </div>
+            {{#if overError}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Please make sure you have entered a number of overs!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{else}}
             <div class='row'>
                 <h3 style='color:grey'>Current over: {{overStringOne}}</h3>
             </div>
+            {{/if}}
         </div>
         {{/if}}
         <div class='row'>
@@ -94,16 +104,26 @@
             </div>
             <div class='row'>
                 <form action="/random/over" method="POST">
-                    <button style='margin-top:8px' type='submit' name='team' value='2' class='btn btn-primary'>Generate random over</button>
+                    <button style='margin-top:8px' type='submit' name='team' value='2' class='btn btn-primary'>Generate
+                        random over</button>
                 </form>
                 <form action="/submit/over" method="POST">
                     <button style='margin:8px' type='submit' name='team' value='2' class='btn btn-primary'>Submit
                         Over</button>
                 </form>
             </div>
+            {{#if overError}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Please make sure you have entered a number of overs!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{else}}
             <div class='row'>
                 <h3 style='color:grey'>Current over: {{overStringTwo}}</h3>
             </div>
+            {{/if}}
         </div>
         {{/if}}
         <div class='row'>
